@@ -1,0 +1,1 @@
+UPDATE users SET pass='qw' WHERE id=10

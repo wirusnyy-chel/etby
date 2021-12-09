@@ -1,0 +1,42 @@
+version: "3.9"
+services:
+  register:
+    image: etby-register
+    container_name: RegisterService
+    ports:
+      - "50052:50051"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - DB_ADR=AuthDb
+  login:
+    container_name: LoginService
+    image: etby-login
+    ports:
+      - "50051:50051"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - DB_ADR=AuthDB
+  postgres:
+    container_name: AuthDB
+    image: postgres:13.5
+    environment:
+      POSTGRES_DB: "authdb"
+      POSTGRES_USER: "authuser"
+      POSTGRES_PASSWORD: "auth"
+      PGDATA: "/var/lib/postgresql/data/pgdata" 
+    volumes:
+      - .:/docker-entrypoint-initdb.d
+      - .:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "--dbname=authdb", "--username=authuser" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10  
+
+  

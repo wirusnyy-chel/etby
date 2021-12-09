@@ -1,0 +1,54 @@
+ syntax = "proto3";
+
+// option go_package = "/notify";
+
+// service Notify {
+//     rpc Send(Msg) returns (Status);
+//     rpc GetNotificationList(UserID) returns (Status);
+//     //Current user id in ctx
+//     rpc AddNotification(Notification) returns(Status);
+//     rpc ConfirmNotification(NotificationCode) returns(Status);
+//     rpc NotificationSetStatus(Notification) returns(Status);
+// }
+// message Msg{
+//     int64 userID = 1;
+//     string msg = 2;
+// }
+// message UserID {
+//     int64 id = 1;
+// }
+// message Notification {
+//     NotifyServices service = 1;
+//     string id_in_service = 2;
+//     NotifyStatus status = 3;
+// }
+// enum NotifyServices {
+//     default =0;
+//     telegram = 2;
+//     reserved 1, 3 to 6; 
+// }
+// enum NotifyStatus {
+//     none = 0;
+//     auth = 1;
+// }
+
+// message Status{
+//     bool ok = 1;
+// }
+// message UserData{
+//     reserved 1; reserved "id";
+//     string name = 2;
+//     reserved 3; reserved "friends";
+//     //Privacy profile_visible = 4;
+//     reserved "email"; reserved 5;
+//     string telegram = 6;
+// }
+// message UserInfo{
+//     int64 id = 1;
+//     string name = 2;
+//     repeated int64 friends = 3;
+//     //Privacy profile_visible = 4;
+//     reserved "email"; reserved 5;
+//     string telegram = 6;
+//     reserved 7 to 10; //other notification sources   
+// }

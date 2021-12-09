@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option go_package = "/friends";
+
+service Friends {
+    rpc GetFriendList(UserID) returns (FriendList);
+    //Current user id in ctx
+    rpc AddFriend(UserID) returns (Status);
+    rpc ConfirmFriend(UserID) returns (Status);
+    rpc DeleteFriend(UserID) returns (Status);
+    rpc RangeToFriend (UserID) returns (Range);
+}
+message Status{
+    bool ok = 1;
+}
+message UserID {
+    int64 id = 1;
+}
+message FriendList{
+    repeated int64 id = 1;
+}
+message Range {
+    int64 range = 1;
+}

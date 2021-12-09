@@ -1,0 +1,94 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+type Event{
+  id: String!
+  name: String!
+  description: String
+  startTime: Int!
+  endTime: Int!
+  status: EventStatus!
+  user: User!
+  classifier: Classifier
+  related: Related
+}
+enum EventStatus {
+  PLANNED
+  VISITED
+  MISSED 
+  POSTPONED
+}
+type Task {
+  id: String!
+  name: String!
+  description: String
+  startTime: Int
+  endTime: Int
+  status: TaskStatus!
+  user: User!
+  classifier: Classifier
+  related: Related
+}
+enum TaskStatus {
+  ASSIGNED
+  FULFILLED
+  UNFULFILLED
+  DELETED
+}
+type Classifier {
+  type: Type
+  class: Class
+  parentTask: Task
+  parentEvent: Event
+}
+type Type {
+  id: String!
+  name: String!
+  user: User! 
+}
+type Class{
+  id: String!
+  name: String!
+  user: User! 
+}
+type Related{
+  task: [Task]
+  event: [Event]
+}
+
+type User {
+  id: ID!
+  name: String!
+}
+
+type Query {
+  events: [Event!]!
+  tasks: [Task!]!
+  event(id:String!):Event!
+  task(id:String!):Task!
+}
+input NewEvent {
+  name: String!
+  description: String
+  startTime: Int!
+  endTime: Int!
+}
+input NewTask {
+  name: String!
+  description: String
+  startTime: Int
+  endTime: Int
+}
+input Edit {
+  name: String
+  description: String
+  startTime: Int
+  endTime: Int
+}
+type Mutation {
+  createEvent(newEvent: NewEvent!):Event!
+  createTask(newTask: NewTask!):Task!
+  editEvent(id:String!, event:Edit!):Event!
+  editTask(id:String!, task:Edit!):Task!
+}

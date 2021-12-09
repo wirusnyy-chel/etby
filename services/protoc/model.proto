@@ -1,0 +1,9 @@
+syntax = "proto3";
+package foo.bar;
+//option go_package = "/model";
+message Status{
+    bool ok = 1;
+}
+message UserID {
+    int64 id = 1;
+}
